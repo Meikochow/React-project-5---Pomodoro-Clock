@@ -1,0 +1,193 @@
+body{
+background-image:url("https://s20.postimg.cc/v7ev7xevh/basic_background_50.png");
+ padding-top:30px;
+}
+#container{
+  border:5px double black;
+ width:1000px;
+ margin:auto;
+ display:grid;
+ grid-template-columns: 100% ;
+ grid-template-rows: 300px 120px;
+ background-image:url('https://s20.postimg.cc/6rsmmgjpp/10490942756_e32fe20b88_b.jpg');
+ background-size:1000px;
+}
+#controls{
+ display:grid;
+ grid-template-rows: 100px ;
+ grid-template-columns:33% 33% 33%;
+}
+#time-left{
+ font-size:100px;
+ width:100%;
+ text-align:center;
+ font-family:'Orbitron';
+ color:white;
+ padding-top:80px;
+}
+#countDown{
+ height:120px;
+ justify-self:center;
+ display:grid;
+ grid-template-columns:200px;
+ grid-template-rows:30px 40px 40px;
+ justify-self:center;
+ text-align:center;
+ background:rgba(255, 128, 128, 0.4);
+ font-family:'Orbitron';
+ font-size:30px;
+}
+#countDown:hover{
+ background:rgba(255, 128, 128, 0.6);
+}
+#breakManagement{
+ justify-self:center;
+ height:80px;
+ display:grid;
+ grid-template-columns:80px 50px 80px ;
+ grid-template-rows:40px 40px;
+ justify-self:center;
+ text-align:center;
+ background:rgba(255, 128, 128, 0.4);
+}
+#breakManagement:hover{
+ background:rgba(255, 128, 128, 0.6);
+}
+#break-label{
+ text-align:center;
+ grid-column: 1 / 4;
+ font-family:geo;
+ font-size:30px;
+ background:rgba(255, 255, 255, 0.4);
+}
+#break-length{
+ font-family:'Orbitron';
+ font-size:35px;
+}
+#sessionManagement{
+ height:80px;
+ justify-self:center;
+ display:grid;
+ display:grid;
+ grid-template-columns:80px 50px 80px ;
+ grid-template-rows:40px 45px;
+ justify-self:center;
+ text-align:center;
+ background:rgba(255, 128, 128, 0.4);
+}
+#sessionManagement:hover{
+ background:rgba(255, 128, 128, 0.6);
+}
+#session-label{
+ display:grid;
+ align-self:center;
+ text-align:center;
+ grid-column: 1 / 4;
+ font-family:geo;
+ font-size:30px;
+ background:rgba(255, 255, 255, 0.4);
+}
+#session-length{
+ font-family:'Orbitron';
+ font-size:35px;
+}
+button{
+ border:none;
+ background:none;
+}
+.fa{
+ color:rgba(255, 255, 255, 0.7);
+ font-size:40px;
+}
+.fa:hover{
+ color:white;
+}
+#fFCLogo{
+ width:220px;
+ margin:4px;
+ background:rgba(0, 0, 0, 1);
+}
+footer{
+ color:white;
+ font-size:16px;
+ text-align:center;
+}
+@media screen and (max-width:1000px){
+ #container{
+  width:500px;
+  margin:auto;
+  display:grid;
+  grid-template-columns: 100% ;
+  grid-template-rows: 300px 120px;
+  background-size:800px;
+ }
+ #controls{
+  display:grid;
+  grid-template-rows: 100px ;
+  grid-template-columns:33% 33% 33%;
+ }
+ #breakManagement{
+  grid-template-columns:50px 55px 50px ;
+  grid-template-rows:40px 45px;
+  background:rgba(255, 255, 255, 0.4);
+  }
+ #sessionManagement{
+  grid-template-columns:50px 55px 50px ;
+  grid-template-rows:40px 45px;
+  background:rgba(255, 255, 255, 0.4);
+  }
+ #countDown{
+  grid-template-columns:160px;
+  grid-template-rows:30px 40px 40px;
+  background:rgba(255, 255, 255, 0.4);
+  }
+}
+@media screen and (max-width:500px){
+ body{
+  padding-top:0px;
+  background:black;
+ }
+ #container{
+  width:250px;
+  margin:auto;
+  display:'';
+}
+ #time-left{
+  font-size:100px;
+  width:100%;
+  text-align:center;
+  font-family:'Orbitron';
+  color:white;
+  padding-top:30px;
+  font-size:66px;
+}
+ #controls{
+  display:'';
+}
+ #countDown{
+  margin-top:-150px;
+  margin-left:5px;
+  background:rgba(255, 255, 255, 0.3);
+  font-size:22px;
+  height:94px;
+  grid-template-rows:25px 35px 35px;
+  }
+ #sessionManagement{
+  margin-top:-50px;
+  margin-left:-160px;
+  grid-template-columns:80px 50px 80px ;
+  grid-template-rows:40px 45px;
+  background:rgba(255, 255, 255, 0.3);
+}
+ #breakManagement{
+  margin-top:35px;
+  margin-left:170px;
+  grid-template-columns:80px 50px 80px ;
+  grid-template-rows:40px 40px;
+  background:rgba(255, 255, 255, 0.4);
+  }
+ .fa{
+  font-size:30px;
+  margin:-10px;
+  }
+}

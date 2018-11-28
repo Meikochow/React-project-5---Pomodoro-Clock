@@ -1,0 +1,120 @@
+class App extends React.Component{
+  constructor(props){
+    super(props)
+    this.state={
+    power:true,
+    timerLabel:'Session',
+    break:5,
+    session:25,
+    timer:1500,
+    }
+this.displayTime=this.displayTime.bind(this);
+this.countTime=this.countTime.bind(this);
+this.timerLabelToggle=this.timerLabelToggle.bind(this);
+this.countdownCheck=this.countdownCheck.bind(this);
+this.manageBreakLength = this.manageBreakLength.bind(this);
+this.manageSessionLength = this.manageSessionLength.bind(this);
+this.updateSession = this.updateSession.bind(this);
+this.updateBreak = this.updateBreak.bind(this);
+this.reset = this.reset.bind(this);
+  }
+manageBreakLength(e){
+  if(this.state.power){
+      if(e.target.value=="-"){this.state.break>1? this.setState({break:this.state.break-1}):this.setState({break:this.state.break})
+      }else if(e.target.value =="+"){this.state.break<60? this.setState({break:this.state.break+1}):this.setState({break:this.state.break})
+      }
+      if(this.state.timerLabel === "Break"){setTimeout(()=>{this.updateBreak();},1);
+      }
+  }else{ return;}
+}
+updateBreak(){
+  this.state.break<10?this.setState({timer:this.state.break*60,time_left:"0"+this.state.break+':00'}):this.setState({timer:this.state.break*60,time_left:this.state.break+':00'})
+  }
+manageSessionLength(e){
+  if(this.state.power){
+      if(e.target.value=="-"){this.state.session>1? this.setState({session:this.state.session-1}):this.setState({session:this.state.session});
+      }
+    else if(e.target.value =="+"){this.state.session<60? this.setState({session:this.state.session+1}):this.setState({session:this.state.session});
+      }
+    if(this.state.timerLabel === "Session"){setTimeout(()=>{this.updateSession();},1);
+      }else{ return;}
+  }else{return;}
+}
+updateSession(){ 
+  this.state.session<10?this.setState({timer:this.state.session*60,time_left:'0'+this.state.session+':00'}):this.setState({timer:this.state.session*60,time_left:this.state.session+':00'})
+}
+countdownCheck(){
+var timeLeft = this.state.timer;
+this.playAlarm(timeLeft);
+  if(timeLeft<0){
+this.state.timerLabel == 'Session' ? (clearInterval(this.state.interval), this.timerLabelToggle(this.state.break * 60, 'Break'),   this.setState({power:true}), this.countTime()):(clearInterval(this.state.interval), this.timerLabelToggle(this.state.session * 60, 'Session'), this.setState({power:true}), this.countTime() )
+  }
+}
+playAlarm(_timeLeft){
+ if(_timeLeft === 0){document.getElementById('beep').play();}
+} 
+timerLabelToggle(timePeriod, label){
+  this.setState({
+    timer:timePeriod,
+    timerLabel:label
+  })
+}
+countTime(){      
+    if(this.state.power){
+      this.setState({power:false});
+      this.state.interval = setInterval(()=>{this.setState({timer:this.state.timer-1}),this.countdownCheck();},1000);
+    }
+    else{
+      clearInterval(this.state.interval);
+      this.setState({power:true});
+    }
+}
+displayTime(){
+    let min = Math.floor(this.state.timer / 60);
+    let sec = this.state.timer - min * 60;
+    min = min < 10 ? '0' + min :min;
+    sec = sec < 10 ? '0' + sec :sec;
+return min +":"+sec;
+}
+reset(){
+clearInterval(this.state.interval);   this.setState({power:true,break:5,session:25,timer:1500,timerLabel:'Session',time_left:'25:00'});
+document.getElementById('beep').pause();
+document.getElementById('beep').currentTime = 0;
+    console.log('reset')
+  }
+ render(){
+   var startToggle = this.state.power ? 'fa fa-play':'fa fa-pause'
+     return(
+      <div id="container">
+          <div id="time-left" onClick={this.countTime}>{this.displayTime()}</div>
+        <div id="controls">
+         <div id="breakManagement">
+          <button id="break-decrement" value="-" onClick={this.manageBreakLength} class="fa fa-minus-square"></button>
+          <div id="break-length">{this.state.break}</div>
+          <button id="break-increment" value='+' onClick={this.manageBreakLength} class="fa fa-plus-square"></button>
+          <div id="break-label" >Break</div>
+        </div>
+        <div id="countDown">
+          <div id="timer-label" >{this.state.timerLabel}</div>
+          <button id="start_stop" onClick={this.countTime} class={startToggle}></button>
+          <button id="reset" onClick={this.reset} class="fa fa-retweet"></button>
+          <audio id="beep" preload="auto" src="https://www.myinstants.com/media/sounds/alarme-factorio.mp3"/> 
+        </div>
+        <div id="sessionManagement">
+          <button type="button" id="session-decrement" value="-" onClick={this.manageSessionLength} class="fa fa-minus-square"></button> 
+          <div id="session-length">{this.state.session}</div>
+          <button type="button" id="session-increment" value="+" onClick={this.manageSessionLength} class="fa fa-plus-square"></button>  
+          <div id="session-label">Session</div>
+        </div>
+       </div>
+
+       <footer>
+         <a href="https://www.freecodecamp.org/challenges/learn-how-freecodecamp-works" target="_blank"> <img id="fFCLogo" src="https://design-style-guide.freecodecamp.org/downloads/freeCodeCamp-alternative.png"/></a>
+         <br/>
+         Coded by Victor Cojocaru 2018</footer>
+      </div>
+      
+    )
+  }
+}
+ReactDOM.render(<App/>,app)
